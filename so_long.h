@@ -6,7 +6,7 @@
 /*   By: arbaudou <arbaudou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:13:55 by arbaudou          #+#    #+#             */
-/*   Updated: 2024/12/05 23:28:06 by arbaudou         ###   ########.fr       */
+/*   Updated: 2024/12/08 18:14:18 by arbaudou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,22 @@ typedef struct s_data
 typedef struct s_map
 {
     char    *txt;
+    char    *n_map;
     size_t  col;
     size_t  row;
     size_t  health;
     size_t  *player_pos;
     size_t  *exit_pos;
     size_t  *wall_pos;
-    size_t *item_pos;
+    size_t  *void_pos;
+    size_t  *item_pos;
+    size_t  *monster_pos;
+    size_t  monster_nb;
+    size_t  item_nb;
+    size_t  wall_nb;
+    size_t  void_nb;
+    size_t  exit_nb;
+    size_t  player_nb;
 }           t_map;
 
 
@@ -59,7 +68,17 @@ int is_rectangle(t_map **map);
 int is_wall_ok(t_map **map);
 int is_elem_present(t_map **map);
 int is_carac_ok(t_map **map);
+char *str_nmap(t_map **map);
+int struct_fill(t_map **map);
+int flood_fill(t_map *map);
 
+
+/*OPTIONNEL*/
+void print_wall_pos(t_map *map);
+void print_item_pos(t_map *map);
+
+
+void free_map_struct(t_map *map);
 
 
 void split(t_map **map);

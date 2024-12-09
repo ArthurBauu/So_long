@@ -6,7 +6,7 @@
 /*   By: arbaudou <arbaudou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 17:49:23 by arbaudou          #+#    #+#             */
-/*   Updated: 2024/12/05 22:26:22 by arbaudou         ###   ########.fr       */
+/*   Updated: 2024/12/08 18:15:42 by arbaudou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,22 @@ t_map *init_map_struct(void)
 
     map = malloc(sizeof(t_map));
     if (!map)
-        //return(NULL);
+        return(NULL);
     map->txt = NULL;
-    map->col = 0;
-    map->row = 0;
-    map->health = 3;
-    map->item_pos = NULL;
+    map->n_map = NULL;
     map->player_pos = NULL;
     map->exit_pos = NULL;
     map->wall_pos = NULL;
     map->item_pos = NULL;
+    map->monster_pos = NULL;
+    map->col = 0;
+    map->row = 0;
+    map->health = 3;
+    map->wall_nb = 0;
+    map->item_nb = 0;
+    map->monster_nb = 0;
+    map->exit_nb = 0;
+    map->player_nb = 0;
     return (map);
 }
 
@@ -62,11 +68,15 @@ short map_creation(char *map_path, t_map **map)
     *map = init_map_struct();
     (*map)->txt = read_ber(map_path);
     if (is_rectangle(map) != 0)
-		return (ft_printf("Format de la map incorrect"), 0);
+		return (ft_printf("La carte doit etre un rectangle"), 0);
 	if (is_wall_ok(map) != 0)
 		return (ft_printf("Il est necessaire que des murs encadre la map"));
 	if (is_elem_present(map) != 0 || is_carac_ok(map) != 0)
 		return (0);
-	split(map);
+	str_nmap(map);
+	struct_fill(map);
+	if (flood_fill(*map) == 0)
+		ft_printf("SUCCES");
+	//free_map_struct(*map);
 	return (1);
 }

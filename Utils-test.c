@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arbaudou <arbaudou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 18:20:40 by arbaudou          #+#    #+#             */
-/*   Updated: 2024/12/08 21:22:55 by arbaudou         ###   ########.fr       */
+/*   Created: 2024/12/08 17:33:42 by arbaudou          #+#    #+#             */
+/*   Updated: 2024/12/08 17:34:10 by arbaudou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-short so_long(char *map_path)
+void print_wall_pos(t_map *map)
 {
-    t_map *map;
-    //t_mlx *mlx;
+    printf("Positions des murs (wall_pos):\n");
+    for (size_t i = 0; i < map->wall_nb; i++)
+    {
+        printf("Mur %zu à la position: %zu\n", i + 1, map->wall_pos[i]);
+    }
+}
 
-    if (map_creation(map_path, &map) != 0)
-        return (EXIT_FAILURE);
-    free_map_struct(map);
-    return (1);
+void print_item_pos(t_map *map)
+{
+    printf("Positions des items (item_pos):\n");
+    for (size_t i = 0; i < map->item_nb; i++)
+    {
+        printf("item %zu à la position: %zu\n", i + 1, map->item_pos[i]);
+    }
 }

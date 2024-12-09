@@ -6,7 +6,7 @@
 /*   By: arbaudou <arbaudou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:05:24 by arbaudou          #+#    #+#             */
-/*   Updated: 2024/12/05 23:26:13 by arbaudou         ###   ########.fr       */
+/*   Updated: 2024/12/06 23:43:22 by arbaudou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int is_rectangle(t_map **map)
             return (-1);
         i++;
     }
-    if (ft_strlen(tab[0]) <= i || i <= 3 || ft_strlen(tab[0]) <= 3)
+    if (ft_strlen(tab[0]) == i || i <= 3 || ft_strlen(tab[0]) <= 3)
         return (-1);
     (*map)->col = ft_strlen(tab[0]);
     (*map)->row = i;
-    free (tab);
+    ft_ffree(tab, (*map)->row);
     return (0);
 }
 
@@ -61,7 +61,7 @@ int is_wall_ok(t_map **map)
             return (-1);
         i++;
     }
-    free(tab);
+    ft_ffree(tab, (*map)->row);
     return (0);
 }
 
@@ -117,7 +117,7 @@ int is_elem_present(t_map **map)
             ft_printf("Il ne doit y avoir qu'une sortie");
         return (-1);
     }
-    free (tab);
+    ft_ffree(tab, (*map)->row);
     return (0);
 }
 
@@ -146,20 +146,20 @@ int is_carac_ok(t_map **map)
         }
         i++;
     }
-    free(tab);
+    ft_ffree(tab, (*map)->row);
     return (0);
 }
 
-void split(t_map **map)
-{
-    int i;
-    char **tab;
+// void split(t_map **map)
+// {
+//     int i;
+//     char **tab;
 
-    i = 0;
-    tab = ft_split((*map)->txt, '\n');
-    while (tab[i])
-    {
-        ft_printf("%s\n", tab[i]);
-        i++;
-    }   
-}
+//     i = 0;
+//     tab = ft_split((*map)->txt, '\n');
+//     while (tab[i])
+//     {
+//         ft_printf("%s\n", tab[i]);
+//         i++;
+//     }
+// }
